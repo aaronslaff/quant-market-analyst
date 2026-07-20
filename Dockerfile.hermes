@@ -1,0 +1,19 @@
+FROM python:3.11-slim
+
+# Install system dependencies (git, build tools, etc.)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git curl gcc g++ build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install Hermes Agent from source/pip
+RUN pip install --no-cache-dir hermes-agent
+
+# Set up data directory for persistence
+ENV HERMES_HOME=/opt/data
+WORKDIR /opt/data
+
+EXPOSE 8642
+
+CMD ["hermes", "gateway"]

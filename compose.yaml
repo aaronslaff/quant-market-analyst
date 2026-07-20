@@ -8,13 +8,10 @@ services:
     ports:
       - "11434:11434"
     environment:
-      # Bind to 0.0.0.0 so Hermes can reach the API across container boundaries
       - OLLAMA_HOST=0.0.0.0:11434
-      # Keep models loaded in GPU VRAM longer
       - OLLAMA_KEEP_ALIVE=24h
       - OLLAMA_NUM_CTX=256000
     volumes:
-      # Persists downloaded models on host
       - ~/.ollama:/root/.ollama
     deploy:
       resources:
@@ -23,22 +20,20 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-              
+
+  # CORRECTED: hermes-ui is now aligned to 2 spaces (same level as ollama-backend)
   hermes-ui:
-      # Build locally instead of pulling a remote image
-      build:
-        context: .
-        dockerfile: Dockerfile.hermes
-      container_name: hermes-agent-ui
-      restart: unless-stopped
-      ports:
-        - "8642:8642"
-      environment:
-        - OLLAMA_BASE_URL=http://ollama-backend:11434
-        - HERMES_HOME=/opt/data
-      volumes:
-        # Keeps your installed skills, memories, and settings safe across rebuilds
-        - ~/.hermes:/opt/data
-      depends_on:
-        - ollama-backend
-    
+    build:
+      context: .
+      dockerfile: Dockerfile.hermes
+    container_name: hermes-agent-ui
+    restart: unless-stopped
+    ports:
+      - "8642:8642"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama-backend:11434
+      - HERMES_HOME=/opt/data
+    volumes:
+      - ~/.hermes:/opt/data
+    depends_on:
+      - ollama-backend

@@ -1,16 +1,17 @@
 FROM python:3.11-slim
 
-# Install system dependencies (git, build tools, etc.)
+# Install system dependencies + Node.js (required for WhatsApp/Telegram JS bridges)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git curl gcc g++ build-essential \
+    nodejs npm \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Install Hermes Agent from source/pip
+# Install Hermes Agent
 RUN pip install --no-cache-dir hermes-agent
 
-# Set up data directory for persistence
+# Set up data directory
 ENV HERMES_HOME=/opt/data
 WORKDIR /opt/data
 

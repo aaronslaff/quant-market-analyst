@@ -11,6 +11,7 @@ services:
       - OLLAMA_HOST=0.0.0.0:11434
       - OLLAMA_KEEP_ALIVE=24h
       - OLLAMA_NUM_CTX=256000
+      - WHATSAPP_ENABLED=false
     volumes:
       - ~/.ollama:/root/.ollama
     deploy:

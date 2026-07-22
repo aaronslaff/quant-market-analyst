@@ -1,2 +1,5 @@
 docker
 docker.io
+curl
+tmux
+postgresql-client

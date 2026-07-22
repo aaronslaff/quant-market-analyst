@@ -82,7 +82,7 @@ environment:
         package_manager_environment:
             name: ""
             target: ""
-    compose_file_path: ""
+    compose_file_path: compose.yaml
 execution:
     apps: []
     resources:
@@ -95,11 +95,15 @@ execution:
           target: /project/
           description: Project directory
           options: rw
-        - type: volume
-          target: /nvwb-shared-volume/
-          description: ""
-          options: volumeName=nvwb-shared-volume
         - type: host
           target: /opt/data/
           description: ""
           options: ""
+        - type: volume
+          target: /home/aaronslaff/.hermes/
+          description: ""
+          options: ""
+        - type: volume
+          target: /nvwb-shared-volume/
+          description: ""
+          options: volumeName=nvwb-shared-volume

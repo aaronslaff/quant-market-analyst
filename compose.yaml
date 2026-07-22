@@ -38,18 +38,3 @@ services:
       - ~/.hermes:/opt/data
     depends_on:
       - ollama-backend
-  swe:
-    build:
-      context: .
-      dockerfile: Dockerfile.hermes
-    container_name: swe
-    restart: unless-stopped
-    ports:
-      - "8643:8643"
-    environment:
-      - OLLAMA_BASE_URL=http://ollama-backend:11434
-      - HERMES_HOME=/opt/data
-    volumes:
-      - ~/.hermes:/opt/data
-    depends_on:
-      - ollama-backend

@@ -36,5 +36,6 @@ services:
       - HERMES_HOME=/opt/data
     volumes:
       - ~/.hermes:/opt/data
+      - .:/project
     depends_on:
       - ollama-backend

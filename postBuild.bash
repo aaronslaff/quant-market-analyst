@@ -3,3 +3,8 @@
 # after all system packages and programming language specific package have been installed.
 #
 # Note: This file may be removed if you don't need to use it
+sudo groupadd -g 988 host-docker || true
+
+sudo usermod -aG host-docker workbench
+
+pip install hermes-agent --user

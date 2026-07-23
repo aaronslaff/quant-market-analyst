@@ -7,4 +7,4 @@ sudo groupadd -g 988 host-docker || true
 
 sudo usermod -aG host-docker workbench
 
-pip install hermes-agent --user
+

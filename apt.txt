@@ -3,3 +3,5 @@ docker.io
 curl
 tmux
 postgresql-client
+hermes
+hermes-agent
